@@ -31,7 +31,8 @@ const reportPost = (id) => {
 };
 
 const displayContent = (text) => {
-    return text.length < 30 ? 'text' : text.slice(0, 30) + "<span class='fw-bold'>... read more</span>";
+  // post description done.
+    return text.length < 30 ? text.slice(0, 30) : text.slice(0, 30) + "<span class='fw-bold'>... read more</span>";
 };
 
 const switchTab = (id) => {
@@ -55,6 +56,8 @@ const switchTab = (id) => {
 };
 
 const createPost = (post) => {
+
+  console.log(post.description)
     const image = post.image;
 // user images done.
     const userImage = post.userImage
