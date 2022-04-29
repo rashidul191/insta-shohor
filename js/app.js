@@ -1,6 +1,7 @@
 let posts = [];
 
 let likedPostsId = [];
+
 const reportedPostsId = [];
 
 const getLikedPosts = () => {
@@ -8,7 +9,10 @@ const getLikedPosts = () => {
 };
 
 const getReportedPosts = () => {
+  
+  //console.log(posts)
   return posts.filter((post) => reportedPostsId.includes(post.id));
+
 };
 
 const isLiked = (id) => {
@@ -16,18 +20,16 @@ const isLiked = (id) => {
 };
 
 const addToLiked = (id) => {
-  // console.log("add to like btn click done")
-  // console.log(id)
-
-  likedPostsId.plus(id);
+  // like post done
+ likedPostsId.push(id);
   showPosts(posts);
 };
 
 const reportPost = (id) => {
   reportedPostsId.push(id);
-  const remainingPosts = posts.filter(
-    (post) => !reportedPostsId.includes(post.id)
-  );
+
+  const remainingPosts = posts.filter((post) => !reportedPostsId.includes(post.id));
+
   showPosts(remainingPosts);
 };
 
@@ -59,7 +61,7 @@ const switchTab = (id) => {
 };
 
 const createPost = (post) => {
-  // user and comments done.
+  // user and comments
   const userComment = post.comments[0];
 
   const image = post.image;
@@ -98,10 +100,7 @@ const createPost = (post) => {
               <div class="post__footer">
                 <div class="post__buttons">
                   <button class="post__button" onclick="addToLiked(${post.id})">
-                  <i class="fa-solid fa-heart ${
-                    isLiked(post.id) && "text-danger"
-                  }"></i>
-                    
+                  <i class="fa-solid fa-heart ${isLiked(post.id) && "text-danger"}"></i>                    
                   </button>
                   <button class="post__button">
                     <i class="fa-solid fa-comment"></i>
@@ -168,7 +167,9 @@ const displayLikedPosts = () => {
 };
 
 const displayReportedPosts = () => {
+
   const reportedPosts = getReportedPosts();
+// console.log(reportedPosts);
   posts.forEach((post) => {
     const div = createPost(post);
     document.getElementById("reported").appendChild(div);
