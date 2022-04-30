@@ -1,18 +1,16 @@
 let posts = [];
 
 let likedPostsId = [];
-
 const reportedPostsId = [];
 
 const getLikedPosts = () => {
+  //console.log(likedPostsId);
   return posts.filter((post) => likedPostsId.includes(post.id));
 };
 
 const getReportedPosts = () => {
-  
   //console.log(posts)
   return posts.filter((post) => reportedPostsId.includes(post.id));
-
 };
 
 const isLiked = (id) => {
@@ -21,14 +19,17 @@ const isLiked = (id) => {
 
 const addToLiked = (id) => {
   // like post done
- likedPostsId.push(id);
+  likedPostsId.push(id);
+
   showPosts(posts);
 };
 
 const reportPost = (id) => {
   reportedPostsId.push(id);
 
-  const remainingPosts = posts.filter((post) => !reportedPostsId.includes(post.id));
+  const remainingPosts = posts.filter(
+    (post) => !reportedPostsId.includes(post.id)
+  );
 
   showPosts(remainingPosts);
 };
@@ -100,7 +101,9 @@ const createPost = (post) => {
               <div class="post__footer">
                 <div class="post__buttons">
                   <button class="post__button" onclick="addToLiked(${post.id})">
-                  <i class="fa-solid fa-heart ${isLiked(post.id) && "text-danger"}"></i>                    
+                  <i class="fa-solid fa-heart ${
+                    isLiked(post.id) && "text-danger"
+                  }"></i>                    
                   </button>
                   <button class="post__button">
                     <i class="fa-solid fa-comment"></i>
@@ -160,17 +163,20 @@ const showPosts = (posts) => {
 
 const displayLikedPosts = () => {
   const likedPosts = getLikedPosts();
+
+  console.log(likedPosts);
+
   likedPosts.forEach((post) => {
     const div = createPost(post);
+
+    console.log(div);
     document.getElementById("liked").appendChild(div);
   });
 };
-
 const displayReportedPosts = () => {
-
   const reportedPosts = getReportedPosts();
-// console.log(reportedPosts);
-  posts.forEach((post) => {
+  // console.log(reportedPosts);
+  reportedPosts.forEach((post) => {
     const div = createPost(post);
     document.getElementById("reported").appendChild(div);
   });
