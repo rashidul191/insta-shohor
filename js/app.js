@@ -1,15 +1,13 @@
+document.getElementById("question-ans").style.display = "block";
 let posts = [];
-
 let likedPostsId = [];
 const reportedPostsId = [];
 
 const getLikedPosts = () => {
-  //console.log(likedPostsId);
   return posts.filter((post) => likedPostsId.includes(post.id));
 };
 
 const getReportedPosts = () => {
-  //console.log(posts)
   return posts.filter((post) => reportedPostsId.includes(post.id));
 };
 
@@ -46,17 +44,18 @@ const switchTab = (id) => {
     document.getElementById("posts").style.display = "grid";
     document.getElementById("liked").style.display = "none";
     document.getElementById("reported").style.display = "none";
+    document.getElementById("question-ans").style.display = "block";
   } else if (id === "liked") {
     document.getElementById("liked").style.display = "block";
     document.getElementById("posts").style.display = "none";
     document.getElementById("reported").style.display = "none";
-
+    document.getElementById("question-ans").style.display = "none";
     displayLikedPosts();
   } else {
     document.getElementById("reported").style.display = "block";
     document.getElementById("posts").style.display = "none";
     document.getElementById("liked").style.display = "none";
-
+    document.getElementById("question-ans").style.display = "none";
     displayReportedPosts();
   }
 };
@@ -164,18 +163,13 @@ const showPosts = (posts) => {
 const displayLikedPosts = () => {
   const likedPosts = getLikedPosts();
 
-  console.log(likedPosts);
-
   likedPosts.forEach((post) => {
     const div = createPost(post);
-
-    console.log(div);
     document.getElementById("liked").appendChild(div);
   });
 };
 const displayReportedPosts = () => {
   const reportedPosts = getReportedPosts();
-  // console.log(reportedPosts);
   reportedPosts.forEach((post) => {
     const div = createPost(post);
     document.getElementById("reported").appendChild(div);
